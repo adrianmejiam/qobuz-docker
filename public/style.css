@@ -1,0 +1,14 @@
+input {
+    width: 25em;
+}
+
+#form {
+    text-align: center;
+    margin: 2em;
+}
+
+#logoutput {
+    margin: 2em;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
