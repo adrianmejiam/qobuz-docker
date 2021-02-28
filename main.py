@@ -10,7 +10,7 @@ password = os.environ['QOBUZPASS']
 log_stream = StringIO()
 log_handler = logging.StreamHandler(log_stream)
 logger = logging.getLogger('qobuz_dl')
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 for handler in logger.handlers:
     logger.removeHandler(handler)
 logger.addHandler(log_handler)
@@ -32,8 +32,9 @@ class StringdownloadWebService(object):
     def GET(self):
         return cherrypy.session['mystring']
 
-    def POST(self, url=''):
+    def POST(self, url='', quality=''):
         log_stream.truncate(0)
+        qobuz.quality = quality
         qobuz.handle_url(url)
         return log_stream.getvalue()
 

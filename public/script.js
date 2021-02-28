@@ -5,7 +5,7 @@ $(document).ready(function() {
         dl_button.html('Downloading...');
         $("#logoutput").html('Loading...');
 
-        $.post("/download", {"url": $("input[name='url']").val()})
+        $.post("/download", {"url": $("input[name='url']").val(), "quality": $("select[name='quality']").val()})
             .done(function(string) {
                 dl_button.html('Download');
                 $("#logoutput").html(string);
