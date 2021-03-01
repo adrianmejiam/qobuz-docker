@@ -9,16 +9,24 @@
     <div id="form">
         Quality:
         <select id="quality" name="quality">
-        <option value="5">MP3<br>
-        <option value="6">FLAC<br>
-        <option value="7" selected>24bits &lt;96kHz<br>
-        <option value="27">24bits &gt;96kHz<br>
+            <option value="5">MP3<br>
+            <option value="6">FLAC<br>
+            <option value="7" selected>24bits &lt;96kHz<br>
+            <option value="27">24bits &gt;96kHz<br>
         </select>
         &nbsp;&nbsp;&nbsp;
         Url:
-        <input type="text" value="" name="url"/>
+        <input id="url" type="text" placeholder="https://play.qobuz.com/" value="" name="url"/><br><br>
+
+        Username:
+        <input type="text" placeholder="default" name="email"/>
+        &nbsp;&nbsp;&nbsp;
+        Password:
+        <input type="password" name="password"/><br><br>
+
         <button id="download">Download</button>
     </div>
+
     <div id="logoutput">
     </div>
   </body>
