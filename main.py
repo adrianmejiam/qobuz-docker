@@ -89,5 +89,5 @@ if __name__ == '__main__':
     }
     webapp = Stringdownload()
     webapp.download = StringdownloadWebService()
-    cherrypy.config.update({'server.socket_host': '0.0.0.0'})
+    cherrypy.config.update({'server.socket_host': '0.0.0.0', 'engine.autoreload.on' : False})
     cherrypy.quickstart(webapp, '/', conf)
