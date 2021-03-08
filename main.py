@@ -195,6 +195,9 @@ class CleanService(object):
     # Clean TMP folder
     @cherrypy.tools.accept(media='text/plain')
     def POST(self, url='', quality='', email='', password=''):
+        # Reset Logs
+        log_stream.truncate(0)
+
         try:
             logger.info('Cleaning TMP directory...')
             clean_tmp_dir()
