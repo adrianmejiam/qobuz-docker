@@ -1,13 +1,14 @@
 import os
 import os.path
 import logging
-from io import StringIO
-import cherrypy
-from qobuz_dl.core import QobuzDL
 import requests
 import shutil
-from cherrypy.lib import static
 import uuid
+from io import StringIO
+
+import cherrypy
+from cherrypy.lib import static
+from qobuz_dl.core import QobuzDL
 
 # Default Variables
 TMP_DIR = '/tmp/qobuz/'
@@ -47,14 +48,11 @@ def clean_tmp_dir():
 
 # Create Zip file from directory
 def make_archive(source, destination):
-    base = os.path.basename(destination)
-    name = base.split('.')[0]
-    format = base.split('.')[1]
-    archive_from = os.path.dirname(source)
-    archive_to = os.path.basename(source.strip(os.sep))
-    print(source, destination, archive_from, archive_to)
-    shutil.make_archive(name, format, archive_from, archive_to)
-    shutil.move('%s.%s' % (name, format), destination)
+    name = destination.split('.')[0]
+    format = os.path.basename(destination).split('.')[1]
+    shutil.make_archive(name,
+                        format,
+                        root_dir=source)
 
 
 # Generate Random String
