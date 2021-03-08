@@ -23,7 +23,7 @@ logger.addHandler(log_handler)
 
 
 # Initialize Qobuz object
-qobuz = QobuzDL()
+qobuz = QobuzDL(quality=7, directory=TMP_DIR)
 
 
 # Clean TMP Directory
@@ -163,7 +163,7 @@ class DownloadZipService(object):
             logger.info('Downloaded')
 
             # Make a .Zip file of the downloaded directory
-            make_archive(qobuz.directory, '/tmp/qobuz/' + dirname + '.zip')
+            make_archive(qobuz.directory, TMP_DIR + dirname + '.zip')
 
             # Make <a> link in the log
             logger.info('<a href="/downloadzip?file=' + dirname + '">Download .Zip file</a>')
@@ -183,7 +183,7 @@ class DownloadZipService(object):
             else:
                 zipfile = os.environ['TMPDIR'] + "/" + file + '.zip'
         else:
-            zipfile = '/tmp/qobuz/' + file + '.zip'
+            zipfile = TMP_DIR + file + '.zip'
 
         # Returns the .zip file
         return static.serve_file(zipfile, 'application/x-download',
