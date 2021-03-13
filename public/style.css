@@ -12,3 +12,14 @@
     white-space: pre-wrap;
     font-family: monospace;
 }
+
+#qobuz_urls {
+    margin: 2em;
+    text-align: center;
+}
+
+#logo {
+    display: block;
+    width: 100px;
+    margin: auto;
+}

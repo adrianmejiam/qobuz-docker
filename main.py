@@ -4,6 +4,7 @@ import logging
 import requests
 import shutil
 import uuid
+import re
 from io import StringIO
 
 import cherrypy
@@ -53,6 +54,22 @@ def make_archive(source, destination):
     shutil.make_archive(name,
                         format,
                         root_dir=source)
+
+
+# Format the input url as https://play.qobuz.com/album/ALBUM_ID
+def handle_album_url(url):
+    url_1 = re.match(r'^https?://w?w?w?\.qobuz\.com/.*/album\/.*\/(.*)$', url)
+    url_2 = re.match(r'^http?s://play\.qobuz\.com\/album/(.*)$', url)
+
+    if url_1:
+        qobuz_url = 'https://play.qobuz.com/album/' + url_1.group(1)
+    elif url_2:
+        qobuz_url = 'https://play.qobuz.com/album/' + url_2.group(1)
+    else:
+        qobuz_url = ''
+        logger.error('Only Albums can be downloaded.')
+
+    return qobuz_url
 
 
 # Generate Random String
@@ -108,17 +125,21 @@ class DownloadService(object):
             else:
                 qobuz.directory = TMP_DIR
 
-            # Download the music
-            qobuz.handle_url(url)
+            # Verify that the url is correct
+            qobuz_url = handle_album_url(url)
 
-            logger.info('Downloaded')
+            if qobuz_url:
+                # Download the music
+                qobuz.handle_url(qobuz_url)
 
-            # Update Jellyfin if environment variables are used
-            if "JELLYFINURL" in os.environ and "JELLYFINTOKEN" in os.environ:
-                requests.post(os.environ['JELLYFINURL'],
-                              headers={'X-MediaBrowser-Token':
-                                       os.environ['JELLYFINTOKEN']})
-                logger.info('Jellyfin Updated')
+                logger.info('Downloaded')
+
+                # Update Jellyfin if environment variables are used
+                if "JELLYFINURL" in os.environ and "JELLYFINTOKEN" in os.environ:
+                    requests.post(os.environ['JELLYFINURL'],
+                                  headers={'X-MediaBrowser-Token':
+                                           os.environ['JELLYFINTOKEN']})
+                    logger.info('Jellyfin Updated')
         except:
             logger.error('Error while downloading.')
 
@@ -156,15 +177,19 @@ class DownloadZipService(object):
             else:
                 qobuz.directory = TMP_DIR + dirname
 
-            # Download the music
-            qobuz.handle_url(url)
-            logger.info('Downloaded')
+            # Verify that the url is correct
+            qobuz_url = handle_album_url(url)
 
-            # Make a .Zip file of the downloaded directory
-            make_archive(qobuz.directory, TMP_DIR + dirname + '.zip')
+            if qobuz_url:
+                # Download the music
+                qobuz.handle_url(qobuz_url)
+                logger.info('Downloaded')
 
-            # Make <a> link in the log
-            logger.info('<a href="/downloadzip?file=' + dirname + '">Download .Zip file</a>')
+                # Make a .Zip file of the downloaded directory
+                make_archive(qobuz.directory, TMP_DIR + dirname + '.zip')
+
+                # Make <a> link in the log
+                logger.info('<a href="/downloadzip?file=' + dirname + '">Download .Zip file</a>')
         except:
             logger.error('Error while downloading.')
 
