@@ -3,8 +3,8 @@ FROM ubuntu:20.04
 LABEL maintainer="Dehaeze Thomas <dehaeze.thomas@gmail.com>"
 
 ENV \
-  QOBUZNAME="" \
-  QOBUZPASS="" \
+  QOBUZNAME="92onntgz9l@aakkmail.com" \
+  QOBUZPASS="Mexico_2025" \
   PUID="" \
   PGID=""
 
