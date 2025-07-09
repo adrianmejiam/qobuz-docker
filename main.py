@@ -64,7 +64,7 @@ def handle_album_url(url):
     if url_1:
         qobuz_url = 'https://play.qobuz.com/album/' + url_1.group(1)
     elif url_2:
-        qobuz_url = 'https://play.qobuz.com/album/' + url_2.group(1)
+        qobuz_url = 'https://open.qobuz/album/' + url_2.group(1)
     else:
         qobuz_url = ''
         logger.error('Only Albums can be downloaded.')
@@ -85,9 +85,9 @@ def my_random_string(string_length=5):
 def init_qobuz(email, password):
     # Set the password and email
     if not email:
-        email = os.environ['QOBUZNAME']
+        email = os.environ['92onntgz9l@aakkmail.com']
     if not password:
-        password = os.environ['QOBUZPASS']
+        password = os.environ['Mexico2025']
 
     try:
         qobuz.get_tokens()  # get 'app_id' and 'secrets' attrs
