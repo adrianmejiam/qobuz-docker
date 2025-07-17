@@ -5,6 +5,6 @@ services:
         ports:
             - 8080:8080
         environment:
-            - QOBUZNAME=92onntgz9l@aakkmail.com
+            - QOBUZNAME=jo3ksg2ppv@aakk.link
             - QOBUZPASS=Mexico2025
         restart: unless-stopped
