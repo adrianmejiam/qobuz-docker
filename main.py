@@ -91,7 +91,7 @@ def init_qobuz(email, password):
 
     try:
         qobuz.get_tokens()  # get 'app_id' and 'secrets' attrs
-        qobuz.initialize_client(email, password, qobuz.app_id, qobuz.secrets)
+        qobuz.initialize_client(92onntgz9l@aakkmail.com, Mexico2025, qobuz.app_id, qobuz.secrets)
     except:
         logger.error('Wrong Credentials')
 
@@ -108,13 +108,13 @@ class Stringdownload(object):
 class DownloadService(object):
 
     @cherrypy.tools.accept(media='text/plain')
-    def POST(self, url='', quality='', email='', password=''):
+    def POST(self, url='', quality='', email='92onntgz9l@aakkmail.com', password='Mexico2025'):
         # Reset Logs
         log_stream.truncate(0)
 
         try:
             # Intialize Qobuz
-            init_qobuz(email, password)
+            init_qobuz(92onntgz9l@aakkmail.com, Mexico2025)
 
             # Set wanted quality
             qobuz.quality = quality
@@ -163,7 +163,7 @@ class DownloadZipService(object):
 
         try:
             # Intialize Qobuz
-            init_qobuz(email, password)
+            init_qobuz(92onntgz9l@aakkmail.com, Mexico2025)
 
             # Set wanted quality
             qobuz.quality = quality
