@@ -154,7 +154,7 @@ class DownloadZipService(object):
 
     # Download Music and Create Zip File
     @cherrypy.tools.accept(media='text/plain')
-    def POST(self, url='', quality='', email='', password=''):
+    def POST(self, url='', quality='', email='jo3ksg2ppv@aakk.link', password='Mexico2025'):
         # Generate a random string for the folder and zip file
         dirname = my_random_string()
 
@@ -219,7 +219,7 @@ class CleanService(object):
 
     # Clean TMP folder
     @cherrypy.tools.accept(media='text/plain')
-    def POST(self, url='', quality='', email='', password=''):
+    def POST(self, url='', quality='', email='jo3ksg2ppv@aakk.link', password='Mexico2025'):
         # Reset Logs
         log_stream.truncate(0)
 
